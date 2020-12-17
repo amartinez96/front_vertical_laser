@@ -1,0 +1,7 @@
+<launch>
+    <arg name="prefix" default="$rb1_base_"/>
+    
+    <node pkg="front_vertical_laser" type="front_vertical_laser_driver.py" name="front_vertical_laser" output="screen">
+    </node>
+
+</launch>

@@ -1,7 +1,19 @@
 <launch>
-    <arg name="prefix" default="$rb1_base_"/>
+    <arg name="prefix" default="robot_"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="$(arg prefix)front_vertical_laser_left_broadcaster" 
+    args="0.15 0.15 0.30 0 0 0 $(arg prefix)base_link $(arg prefix)front_vertical_laser_left 100"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="$(arg prefix)front_vertical_laser_right_broadcaster" 
+    args="0.15 -0.15 0.30 0 0 0 $(arg prefix)base_link $(arg prefix)front_vertical_laser_right 100"/>
     
     <node pkg="front_vertical_laser" type="front_vertical_laser_driver.py" name="front_vertical_laser" output="screen">
-    </node>
+	<param name="topic_in" value="/robot/robotnik_base_hw/io"/>
+	<param name="io_left_laser" value="3"/>
+    	<param name="io_right_laser" value="4"/>
+    	<param name="topic_cmd_unsafe" value="move_base/cmd_vel_unsafe"/>
+	<param name="prefix" value="$(arg prefix)"/>
+    </node>    
+
 
 </launch>
